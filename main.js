@@ -12,7 +12,7 @@ const mcping = require('mcping-js')
 const timeout = 5000;
 const protocolVersion = 757;
 
-function checkOnlineAndSend(io, socket_id, server_name){
+function checkOnlineAndSend(io, socket_id, server_name) {
     var server = new mcping.MinecraftServer(server_name, 25565)
     server.ping(timeout, protocolVersion, (err, res) => {
         if (res) {
@@ -23,9 +23,10 @@ function checkOnlineAndSend(io, socket_id, server_name){
     })
 }
 
+app.use(express.static(__dirname + '/public'))
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/checker.html');
 });
 
 io.on('connection', (socket) => {

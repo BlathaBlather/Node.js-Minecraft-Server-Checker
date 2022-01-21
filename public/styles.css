@@ -1,0 +1,36 @@
+.flex-header {
+    display: flex;
+    justify-content: center;
+}
+
+.header {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.items {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 500px;
+}
+
+
+input[type=text] {
+    width: 80%;
+}
+
+.flex-main {
+    display: flex;
+    justify-content: center;
+}
+
+.results {
+    padding-top: 10px;
+}
+
+.result {
+    padding-bottom: 10px;
+}
+
+.progress-bar{
+    width: 100%;
+    display: none;
+}

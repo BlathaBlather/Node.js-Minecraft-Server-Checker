@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <title>Minecraft Server Checker</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+    <header>
+        <div class="flex-header">
+            <h1 class="header">Minecraft Server Checker</h1>
+        </div>
+    </header>
+
+    <div class="flex-main">
+        <div class="items">
+            <p>Find out if a Minecraft Server is running on 1.18.1</p>
+            <div class="flex-main">
+                <input type="text" name="server-name" id="server" placeholder="mc.hypixel.net">
+                <button type="button" id="update">Check Status</button>
+            </div>
+            <progress id="progress-bar" class="progress-bar"></progress>
+            <div class="results">
+                <div class="result">
+                    Server Name: <div id="server-name" style="display: inline;"></div>
+                </div>
+                <div class="result">
+                    Server Status: <div id="server-status" style="display: inline;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+
+    document.getElementById("update").addEventListener('click', function (e) {
+        e.preventDefault();
+        document.getElementById("server-name").innerHTML = document.getElementById("server").value;
+        document.getElementById("server-status").innerHTML = "Checking...";
+        document.getElementById("progress-bar").style.display = "block";
+        console.log("herllo")
+        socket.emit('update', document.getElementById("server").value);
+    });
+
+    socket.on('update', function (msg) {
+        document.getElementById("progress-bar").style.display = "none";
+        if (msg) {
+            document.getElementById("server-status").innerHTML = "<span style='color: green;'>The server is online!</span>";
+        } else {
+            document.getElementById("server-status").innerHTML = "<span style='color: orangered;'>The server is not online.</span>";
+        }
+    });
+</script>
+
+</html>
