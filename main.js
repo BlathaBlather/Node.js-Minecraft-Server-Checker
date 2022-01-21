@@ -6,6 +6,16 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 const mcping = require('mcping-js')
 
+// set up rate limiter: maximum of five requests per minute
+var RateLimit = require('express-rate-limit');
+var limiter = RateLimit({
+  windowMs: 1*60*1000, // 1 minute
+  max: 30
+});
+
+// apply rate limiter to all requests
+app.use(limiter);
+
 // 25565 is the default Minecraft Java Edition multiplayer server port
 // The port may be omitted and will default to 25565
 
